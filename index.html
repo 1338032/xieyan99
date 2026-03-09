@@ -65,7 +65,9 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  background: linear-gradient(160deg, #1a2f28 0%, #2d4a3e 30%, #3d6355 60%, #4a7c6f 100%);
+  background:
+  linear-gradient(160deg, rgba(26, 47, 40, 0.85) 0%, rgba(45, 74, 62, 0.85) 30%, rgba(61, 99, 85, 0.85) 60%, rgba(74, 124, 111, 0.85) 100%),
+  url('https://i.postimg.cc/13GS9JTG/Image-1771070403869.jpg') center/cover no-repeat;
   overflow: hidden;
 }
 
@@ -1196,7 +1198,9 @@ body {
   text-align: center;
   padding: 4rem 2rem;
   margin-top: 3rem;
-  background: linear-gradient(160deg, #1a2f28 0%, #2d4a3e 40%, #4a7c6f 100%);
+  background: 
+    linear-gradient(160deg, rgba(26, 47, 40, 0.88) 0%, rgba(45, 74, 62, 0.88) 40%, rgba(74, 124, 111, 0.88) 100%),
+    url('https://i.postimg.cc/qqWr7Y4Q/Image-1770696115863.jpg') center/cover no-repeat;
   border-radius: 16px;
   position: relative;
   overflow: hidden;
@@ -1251,7 +1255,6 @@ body {
 /* ===== 响应式 ===== */
 @media (max-width: 768px) {
   html { font-size: 14px; }
-
   .prologue-name-ch {
     font-size: 2.8rem;
     letter-spacing: 0.8rem;
@@ -1457,6 +1460,7 @@ body {
   transform: translateY(-2px);
 }
 </style>
+</head>
 <body>
 
 <!-- ===== 开场序幕 ===== -->
@@ -1518,7 +1522,7 @@ body {
 <div class="main-container">
 <!-- 双人合照 -->
 <div style="text-align:center; padding:2rem 1rem 1rem; max-width:600px; margin:0 auto;">
-  <img src="https://i.postimg.cc/NjRh82CT/IMG-20260203-161824.png" alt="谢蔚安与燕世" style="width:100%; max-width:520px; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.18);">
+  <img src="https://i.postimg.cc/NjRh82CT/IMG-20260203-161824.png" alt="谢蔚安与燕世" loading="lazy" style="width:100%; max-width:520px; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.18);">
   <div style="margin-top:0.8rem; font-size:0.82rem; color:#7a9a7a; letter-spacing:0.15em;">谢蔚安 & 燕世</div>
 </div>
 <!-- ==================== 第一章：基础信息 ==================== -->
@@ -3841,7 +3845,7 @@ function debounce(func, wait) {
 // 使用防抖优化resize事件
 window.addEventListener('resize', debounce(() => {
   // 重新计算已展开的手风琴高度
-  document.querySelectorAll('.accordion-content.open').forEach(content => {
+  document.querySelectorAll('.accordion-content.show').forEach(content => {
     content.style.maxHeight = 'none';
   });
 }, 250));
@@ -4000,3 +4004,5 @@ console.log(
   'background: #2a3a4a; color: #c8d8c8; padding: 6px 12px; border-radius: 0 4px 4px 0; font-size: 13px;'
 );
 </script>
+</body>
+</html>
