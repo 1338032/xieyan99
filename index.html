@@ -9,7 +9,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Long+Cang&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
-</head>
 <style>
 :root {
   --pine-green: #4a7c6f;
@@ -1459,10 +1458,513 @@ body {
   background: var(--pine-deep);
   transform: translateY(-2px);
 }
+/* ===== 目录侧边栏样式 ===== */
+.toc-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 26, 26, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.toc-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.toc-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 280px;
+  height: 100%;
+  background: var(--warm-white);
+  z-index: 999;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  transition: left 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.toc-sidebar.show {
+  left: 0;
+}
+
+.toc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--pine-pale);
+  background: var(--pine-whisper);
+}
+
+.toc-title {
+  font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+  font-size: 1.1rem;
+  color: var(--pine-deep);
+  letter-spacing: 0.3rem;
+}
+
+.toc-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 0.3rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.toc-close:hover {
+  color: var(--pine-deep);
+}
+
+.toc-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 0;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  color: var(--ink-medium);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.toc-item:hover {
+  background: var(--pine-whisper);
+  color: var(--pine-deep);
+  border-left-color: var(--pine-green);
+}
+
+.toc-num {
+  font-family: 'Georgia', serif;
+  font-size: 0.7rem;
+  color: var(--pine-mist);
+  margin-right: 0.8rem;
+  font-style: italic;
+}
+
+.toc-trigger {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--pine-green);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 3px 12px var(--shadow-medium);
+  z-index: 97;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toc-trigger:hover {
+  background: var(--pine-deep);
+  transform: scale(1.05);
+}
+/* ===== 朗读功能样式 ===== */
+.speak-btn {
+  background: none;
+  border: 1px solid var(--pine-pale);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.speak-btn:hover {
+  background: var(--pine-whisper);
+  border-color: var(--pine-green);
+}
+
+.speak-btn.speaking {
+  background: var(--pine-green);
+  border-color: var(--pine-green);
+  animation: speakPulse 1s ease-in-out infinite;
+}
+
+@keyframes speakPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* 可朗读元素提示 */
+.quote-block, .dialogue-line.speech {
+  cursor: pointer;
+  position: relative;
+}
+
+.quote-block:hover::after, .dialogue-line.speech:hover::after {
+  content: '点击朗读';
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  font-size: 0.65rem;
+  color: var(--pine-green);
+  background: var(--pine-whisper);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  opacity: 0.7;
+}
+/* ===== 季节主题切换 ===== */
+.theme-switcher {
+  display: flex;
+  gap: 0.2rem;
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--pine-pale);
+}
+
+.theme-btn {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.theme-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* ===== 春·樱粉主题 ===== */
+body.theme-spring {
+  --pine-green: #d4918e;
+  --pine-deep: #b86b6b;
+  --pine-light: #e8a8a5;
+  --pine-mist: #f0c4c2;
+  --pine-pale: #f8e0df;
+  --pine-whisper: #fdf5f5;
+  --warm-gold: #d4a5a0;
+}
+
+body.theme-spring .prologue {
+  background: linear-gradient(160deg, rgba(180, 100, 100, 0.85) 0%, rgba(212, 145, 142, 0.85) 50%, rgba(232, 168, 165, 0.85) 100%),
+    url('https://i.postimg.cc/13GS9JTG/Image-1771070403869.jpg') center/cover no-repeat;
+}
+
+body.theme-spring .epilogue {
+  background: linear-gradient(160deg, rgba(180, 100, 100, 0.88) 0%, rgba(212, 145, 142, 0.88) 100%),
+    url('https://i.postimg.cc/qqWr7Y4Q/Image-1770696115863.jpg') center/cover no-repeat;
+}
+
+/* ===== 夏·海蓝主题 ===== */
+body.theme-summer {
+  --pine-green: #4a8cc7;
+  --pine-deep: #2d6a9e;
+  --pine-light: #6ba8d9;
+  --pine-mist: #a8d0f0;
+  --pine-pale: #d4e8f8;
+  --pine-whisper: #f0f7fc;
+  --warm-gold: #7ab8e0;
+}
+
+body.theme-summer .prologue {
+  background: linear-gradient(160deg, rgba(30, 80, 130, 0.85) 0%, rgba(74, 140, 199, 0.85) 50%, rgba(107, 168, 217, 0.85) 100%),
+    url('https://i.postimg.cc/13GS9JTG/Image-1771070403869.jpg') center/cover no-repeat;
+}
+
+body.theme-summer .epilogue {
+  background: linear-gradient(160deg, rgba(30, 80, 130, 0.88) 0%, rgba(74, 140, 199, 0.88) 100%),
+    url('https://i.postimg.cc/qqWr7Y4Q/Image-1770696115863.jpg') center/cover no-repeat;
+}
+
+/* ===== 秋·枫橙主题 ===== */
+body.theme-autumn {
+  --pine-green: #c4875a;
+  --pine-deep: #a66a3d;
+  --pine-light: #d9a070;
+  --pine-mist: #e8c4a0;
+  --pine-pale: #f5e0cc;
+  --pine-whisper: #fdf6f0;
+  --warm-gold: #c9956a;
+}
+
+body.theme-autumn .prologue {
+  background: linear-gradient(160deg, rgba(140, 80, 40, 0.85) 0%, rgba(196, 135, 90, 0.85) 50%, rgba(217, 160, 112, 0.85) 100%),
+    url('https://i.postimg.cc/13GS9JTG/Image-1771070403869.jpg') center/cover no-repeat;
+}
+
+body.theme-autumn .epilogue {
+  background: linear-gradient(160deg, rgba(140, 80, 40, 0.88) 0%, rgba(196, 135, 90, 0.88) 100%),
+    url('https://i.postimg.cc/qqWr7Y4Q/Image-1770696115863.jpg') center/cover no-repeat;
+}
+
+/* ===== 冬·雪白主题 ===== */
+body.theme-winter {
+  --pine-green: #8a9aa5;
+  --pine-deep: #5a6a75;
+  --pine-light: #a8b8c5;
+  --pine-mist: #c8d4de;
+  --pine-pale: #e0e8ed;
+  --pine-whisper: #f5f8fa;
+  --warm-gold: #9aaab8;
+  --warm-white: #f8fafc;
+}
+
+body.theme-winter .prologue {
+  background: linear-gradient(160deg, rgba(60, 80, 95, 0.85) 0%, rgba(138, 154, 165, 0.85) 50%, rgba(168, 184, 197, 0.85) 100%),
+    url('https://i.postimg.cc/13GS9JTG/Image-1771070403869.jpg') center/cover no-repeat;
+}
+
+body.theme-winter .epilogue {
+  background: linear-gradient(160deg, rgba(60, 80, 95, 0.88) 0%, rgba(138, 154, 165, 0.88) 100%),
+    url('https://i.postimg.cc/qqWr7Y4Q/Image-1770696115863.jpg') center/cover no-repeat;
+}
 </style>
 </head>
 <body>
+<!-- ===== 书香登入页 ===== -->
+<audio id="bgMusic" loop></audio>
+<div class="loading-page" id="loadingPage">
+  <div class="loading-paper"></div>
+  <div class="loading-content">
+    <div class="loading-top-name">Everett</div>
+    <div class="loading-decoration">✦ ─────── ✦</div>
+    <div class="loading-title">谢蔚安</div>
+    <div class="loading-subtitle">原创设定展示</div>
+    <div class="loading-decoration">✦ ─────── ✦</div>
+    <div class="loading-progress-wrap">
+      <div class="loading-progress-bar">
+        <div class="loading-progress-fill" id="progressFill"></div>
+      </div>
+      <div class="loading-progress-text" id="progressText">0%</div>
+    </div>
+    <div class="loading-hint">正在翻开书卷...</div>
+    <div class="loading-author">Created by 心田</div>
+  </div>
+</div>
 
+<style>
+/* ===== 登入页样式 ===== */
+.loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #f5f0e8 0%, #ede6da 50%, #e8e0d0 100%);
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-page.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-paper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(ellipse at 30% 20%, rgba(74, 124, 111, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(197, 169, 125, 0.05) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.loading-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 400px;
+}
+
+.loading-top-name {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #8a9a7a;
+  letter-spacing: 0.6rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.loading-decoration {
+  font-size: 0.8rem;
+  color: #a8cfc0;
+  letter-spacing: 0.3rem;
+  margin: 1rem 0;
+  opacity: 0.6;
+}
+
+.loading-title {
+  font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
+  font-size: 3.2rem;
+  font-weight: 400;
+  color: #2d5a4e;
+  letter-spacing: 0.8rem;
+  margin-bottom: 0.3rem;
+  text-shadow: 0 2px 15px rgba(45, 90, 78, 0.15);
+}
+
+.loading-subtitle {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #6b9e8a;
+  letter-spacing: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.loading-progress-wrap {
+  margin: 2.5rem auto 1rem;
+  max-width: 220px;
+}
+
+.loading-progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(74, 124, 111, 0.15);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #6b9e8a, #4a7c6f);
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+.loading-progress-text {
+  font-family: 'Georgia', serif;
+  font-size: 0.75rem;
+  color: #8a9a7a;
+  margin-top: 0.6rem;
+  letter-spacing: 0.1rem;
+}
+
+.loading-hint {
+  font-family: 'Long Cang', 'Noto Serif SC', cursive;
+  font-size: 0.9rem;
+  color: #a8b8a0;
+  margin-top: 1.5rem;
+  letter-spacing: 0.15rem;
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.loading-author {
+  position: absolute;
+  bottom: -4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.72rem;
+  color: #b8c8b0;
+  letter-spacing: 0.2rem;
+}
+
+/* 响应式 */
+@media (max-width: 480px) {
+  .loading-title {
+    font-size: 2.4rem;
+    letter-spacing: 0.5rem;
+  }
+  .loading-top-name {
+    font-size: 0.85rem;
+    letter-spacing: 0.4rem;
+  }
+}
+</style>
+
+<script>
+// ===== 加载进度动画 =====
+(function() {
+  var loadingPage = document.getElementById('loadingPage');
+  var progressFill = document.getElementById('progressFill');
+  var progressText = document.getElementById('progressText');
+  var progress = 0;
+  var minLoadTime = 2500; // 最少显示2.5秒
+  var startTime = Date.now();
+
+  function updateProgress(value) {
+    progress = Math.min(value, 100);
+    progressFill.style.width = progress + '%';
+    progressText.textContent = Math.round(progress) + '%';
+  }
+
+  // 模拟加载进度
+  var interval = setInterval(function() {
+    if (progress < 90) {
+      progress += Math.random() * 15 + 5;
+      updateProgress(progress);
+    }
+  }, 200);
+
+  // 页面完全加载后
+  window.addEventListener('load', function() {
+    clearInterval(interval);
+    
+    var elapsed = Date.now() - startTime;
+    var remaining = Math.max(0, minLoadTime - elapsed);
+
+    // 快速填满到100%
+    var fillInterval = setInterval(function() {
+      if (progress < 100) {
+        progress += 3;
+        updateProgress(progress);
+      } else {
+        clearInterval(fillInterval);
+      }
+    }, 30);
+
+    // 等待最少时间后淡出
+    setTimeout(function() {
+      updateProgress(100);
+      setTimeout(function() {
+        loadingPage.classList.add('fade-out');
+        // 完全消失后移除元素
+        setTimeout(function() {
+          loadingPage.style.display = 'none';
+        }, 800);
+      }, 400);
+    }, remaining);
+  });
+})();
+</script>
 <!-- ===== 开场序幕 ===== -->
 <div class="prologue">
   <div class="prologue-particles">
@@ -1496,28 +1998,49 @@ body {
   <label for="musicUpload" style="cursor:pointer; font-size:1.3rem; line-height:1; user-select:none;" title="上传音乐">🎵</label>
   <input type="file" id="musicUpload" accept="audio/*" style="display:none;">
   <button id="musicToggle" title="播放/暂停" style="background:none; border:none; font-size:1.2rem; cursor:pointer; padding:0; line-height:1; color:inherit; display:none;">▶</button>
-  <audio id="bgMusic" loop></audio>
+  <button class="speak-btn" id="speakBtn" onclick="toggleSpeak()" title="朗读选中文字">
+  🔊
+</button>
+<div class="theme-switcher">
+  <button class="theme-btn" onclick="setTheme('spring')" title="春·樱粉">🌸</button>
+  <button class="theme-btn" onclick="setTheme('summer')" title="夏·海蓝">🌊</button>
+  <button class="theme-btn" onclick="setTheme('autumn')" title="秋·枫橙">🍂</button>
+  <button class="theme-btn" onclick="setTheme('winter')" title="冬·雪白">❄️</button>
+  <button class="theme-btn" onclick="setTheme('default')" title="松绿·默认">🌲</button>
 </div>
-    <div class="nav-links">
-      <a href="#sec-basic" class="nav-link">基础</a>
-      <a href="#sec-appearance" class="nav-link">外貌</a>
-      <a href="#sec-personality" class="nav-link">性格</a>
-      <a href="#sec-psychology" class="nav-link">心理</a>
-      <a href="#sec-worldview" class="nav-link">三观</a>
-      <a href="#sec-relations" class="nav-link">关系</a>
-      <a href="#sec-memory" class="nav-link">记忆</a>
-      <a href="#sec-family" class="nav-link">家族</a>
-      <a href="#sec-animal" class="nav-link">动物塑</a>
-      <a href="#sec-home" class="nav-link">住所</a>
-      <a href="#sec-schedule" class="nav-link">日程</a>
-      <a href="#sec-dialogue" class="nav-link">对话</a>
-      <a href="#sec-style" class="nav-link">文风</a>
-      <a href="#sec-prompts" class="nav-link">提示词</a>
-      <a href="#sec-contract" class="nav-link">协议</a>
-    </div>
-  </div>
+</div>
+</div>
 </nav>
+<!-- ===== 目录侧边栏 ===== -->
+<div class="toc-overlay" id="tocOverlay" onclick="closeToc()"></div>
+<div class="toc-sidebar" id="tocSidebar">
+  <div class="toc-header">
+    <span class="toc-title">目 录</span>
+    <button class="toc-close" onclick="closeToc()">✕</button>
+  </div>
+  <div class="toc-list">
+    <a href="#sec-basic" class="toc-item" onclick="closeToc()"><span class="toc-num">01</span>基础档案</a>
+    <a href="#sec-appearance" class="toc-item" onclick="closeToc()"><span class="toc-num">02</span>外貌细节</a>
+    <a href="#sec-personality" class="toc-item" onclick="closeToc()"><span class="toc-num">03</span>性格层次</a>
+    <a href="#sec-psychology" class="toc-item" onclick="closeToc()"><span class="toc-num">04</span>心理画像</a>
+    <a href="#sec-worldview" class="toc-item" onclick="closeToc()"><span class="toc-num">05</span>三观体系</a>
+    <a href="#sec-relations" class="toc-item" onclick="closeToc()"><span class="toc-num">06</span>人际关系</a>
+    <a href="#sec-memory" class="toc-item" onclick="closeToc()"><span class="toc-num">07</span>记忆与认知</a>
+    <a href="#sec-family" class="toc-item" onclick="closeToc()"><span class="toc-num">08</span>燕世家族</a>
+    <a href="#sec-animal" class="toc-item" onclick="closeToc()"><span class="toc-num">09</span>动物塑</a>
+    <a href="#sec-home" class="toc-item" onclick="closeToc()"><span class="toc-num">10</span>住所布局</a>
+    <a href="#sec-schedule" class="toc-item" onclick="closeToc()"><span class="toc-num">11</span>日程安排</a>
+    <a href="#sec-dialogue" class="toc-item" onclick="closeToc()"><span class="toc-num">12</span>对话示例</a>
+    <a href="#sec-style" class="toc-item" onclick="closeToc()"><span class="toc-num">13</span>文风指南</a>
+    <a href="#sec-prompts" class="toc-item" onclick="closeToc()"><span class="toc-num">14</span>提示词</a>
+    <a href="#sec-contract" class="toc-item" onclick="closeToc()"><span class="toc-num">15</span>协议</a>
+  </div>
+</div>
 
+<!-- 目录触发按钮 -->
+<button class="toc-trigger" id="tocTrigger" onclick="openToc()" title="打开目录">
+  <span>☰</span>
+</button>
 <!-- ===== 主体容器 ===== -->
 <div class="main-container">
 <!-- 双人合照 -->
@@ -2472,7 +2995,70 @@ body {
     </div>
   </div>
 </div>
+<!-- ==================== 第九点五章：白骑士 ==================== -->
+<div class="section" id="sec-knight">
+  <div class="section-header">
+    <span class="section-number">Chapter 09.5</span>
+    <div class="section-title">白骑士</div>
+    <div class="section-subtitle">White Knight Syndrome</div>
+    <div class="section-line"></div>
+  </div>
 
+  <div class="card">
+    <div class="card-title"><i class="icon">💬</i>燕世的提问与谢蔚安的回应</div>
+    <div class="prose">
+      <p>在长期的交往中，燕世曾问过谢蔚安是否有白骑士综合征，谢蔚安对此对表示震惊，说"你这个词…用得很精准，从纯粹临床的角度，也许可以这么概括。一种源于创伤的、补偿性的救赎行为模式。但是，燕子。'白骑士'想要拯救的，是一个落难的、需要帮助的符号，是谁并不重要。我只是想要'燕世'这个人。无论你是开心的、痛苦的，健康的、生病的。我都想要。不是作为需要被拯救的对象，而是作为我想共度余生的家人。"</p>
+    </div>
+    <div class="quote-block" style="margin-top: 1rem;">
+      谢蔚安的特质与白骑士综合征有明显交集，但核心差异在于"边界感"与"自我认知"，可从"契合点-核心区别-本质定位"三方面解释。
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><i class="icon">🔗</i>一、与白骑士综合征的契合点</div>
+    <div class="worldview-section">
+      <div class="worldview-sub">核心动机重合</div>
+      <div class="prose">
+        <p>均以"拯救他人"为核心行为逻辑，谢蔚安因父母离世的创伤，将"帮助精神疾病患者"内化为人生使命，符合白骑士"通过拯救他人获得价值感"的核心特征。</p>
+      </div>
+      <div class="worldview-sub">行为模式呼应</div>
+      <div class="prose">
+        <p>主动介入他人困境（每日家访、24小时危机响应），在关系中承担"照顾者"角色，甚至愿意突破常规（如医患边界），与白骑士"过度付出、主动承担责任"的行为倾向一致。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><i class="icon">⚖️</i>二、关键区别（避免完全等同于白骑士）</div>
+    <div class="worldview-section">
+      <div class="worldview-sub">尊重对方边界</div>
+      <div class="prose">
+        <p>白骑士常隐含"强制拯救"倾向，而谢蔚安的核心准则是"以患者意愿为最高优先"，拒绝"特殊治疗"便转为常规方案，不强迫、不道德绑架。</p>
+      </div>
+      <div class="worldview-sub">自我认知清醒</div>
+      <div class="prose">
+        <p>白骑士多缺乏自我觉察，将拯救行为完全合理化；谢蔚安则存在持续的自我拷问（"是救人还是满足私欲"），知晓自身"扭曲心理"，始终在道德灰色地带挣扎。</p>
+      </div>
+      <div class="worldview-sub">关系双向性</div>
+      <div class="prose">
+        <p>白骑士的关系多是"单向付出"，谢蔚安与燕世是"医患-恋人-家人"的共生关系，他既拯救对方，也通过这段关系找到自身人生"锚点"，形成双向支撑。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="position: relative; overflow: hidden; border-radius: 12px;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('https://i.postimg.cc/MG310DVN/Image-1770696119867.png') center/cover no-repeat; opacity: 0.15; z-index: 0;"></div>
+    <div style="position: relative; z-index: 1;">
+      <div class="card-title"><i class="icon">🛡️</i>三、本质定位：带白骑士特质的"救赎式引导者"</div>
+      <div class="prose">
+        <p>谢蔚安的"拯救欲"是白骑士综合征的表层表现，但内核是"创伤驱动的自我实现"——他不是盲目追求"拯救者"标签，而是在"陪伴对方与自我和解"的过程中，完成对父母离世的未竟告别。他的特殊性在于：既保留了白骑士"温柔付出"的外壳，又通过"尊重边界、自我反思"突破了白骑士"单向、强制"的固有局限，成为更立体的"救赎与被救赎共生"的角色。</p>
+      </div>
+      <div class="quote-block" style="margin-top: 1rem; background: rgba(255,255,255,0.85);">
+        他既保留了白骑士"温柔付出"的外壳，又通过"尊重边界、自我反思"突破了白骑士的固有局限——成为更立体的"救赎与被救赎共生"的角色。
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ==================== 第十章：住所布局 ==================== -->
 <div class="section" id="sec-home">
   <div class="section-header">
@@ -3554,8 +4140,120 @@ body {
     </div>
   </div>
 </div>
-</body> 
 <script>
+// ===== 季节主题切换 =====
+function setTheme(season) {
+  var body = document.body;
+  // 移除所有主题类
+  body.classList.remove('theme-spring', 'theme-summer', 'theme-autumn', 'theme-winter');
+  
+  if (season !== 'default') {
+    body.classList.add('theme-' + season);
+  }
+  
+  // 保存到本地存储
+  localStorage.setItem('xieweian-theme', season);
+}
+
+// 页面加载时读取保存的主题
+(function() {
+  var savedTheme = localStorage.getItem('xieweian-theme');
+  if (savedTheme && savedTheme !== 'default') {
+    document.body.classList.add('theme-' + savedTheme);
+  }
+})();
+// ===== 目录侧边栏控制 =====
+function openToc() {
+  document.getElementById('tocSidebar').classList.add('show');
+  document.getElementById('tocOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeToc() {
+  document.getElementById('tocSidebar').classList.remove('show');
+  document.getElementById('tocOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+// ===== 文字朗读功能 =====
+var isSpeaking = false;
+var speechSynth = window.speechSynthesis;
+
+function toggleSpeak() {
+  if (isSpeaking) {
+    speechSynth.cancel();
+    isSpeaking = false;
+    document.getElementById('speakBtn').classList.remove('speaking');
+  } else {
+    var selectedText = window.getSelection().toString().trim();
+    if (selectedText) {
+      speakText(selectedText);
+    } else {
+      alert('请先选中要朗读的文字，或点击引用块/对话');
+    }
+  }
+}
+
+function speakText(text) {
+  if (!speechSynth) {
+    alert('您的浏览器不支持语音朗读功能');
+    return;
+  }
+  
+  speechSynth.cancel();
+  
+  // 等待语音列表加载
+  var voices = speechSynth.getVoices();
+  
+  var utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'zh-CN';
+  utterance.rate = 0.9;
+  utterance.pitch = 1;
+  
+  // 尝试选择中文语音
+  var zhVoice = voices.find(function(v) {
+    return v.lang.indexOf('zh') !== -1;
+  });
+  if (zhVoice) {
+    utterance.voice = zhVoice;
+  }
+  
+  utterance.onstart = function() {
+    isSpeaking = true;
+    document.getElementById('speakBtn').classList.add('speaking');
+  };
+  
+  utterance.onend = function() {
+    isSpeaking = false;
+    document.getElementById('speakBtn').classList.remove('speaking');
+  };
+  
+  utterance.onerror = function() {
+    isSpeaking = false;
+    document.getElementById('speakBtn').classList.remove('speaking');
+    alert('朗读出错，请重试');
+  };
+  
+  speechSynth.speak(utterance);
+}
+
+// 预加载语音列表
+if (speechSynth) {
+  speechSynth.getVoices();
+  if (speechSynth.onvoiceschanged !== undefined) {
+    speechSynth.onvoiceschanged = function() {
+      speechSynth.getVoices();
+    };
+  }
+}
+
+// 点击引用块或对话直接朗读
+document.addEventListener('click', function(e) {
+  var target = e.target;
+  if (target.classList.contains('quote-block') || 
+      (target.classList.contains('dialogue-line') && target.classList.contains('speech'))) {
+    speakText(target.textContent);
+  }
+});
 // ==================== 导航栏滚动高亮 ====================
 const nav = document.querySelector('.nav-bar');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -3682,28 +4380,6 @@ window.addEventListener('load', () => {
   }
 });
 
-// ==================== 回到顶部按钮 ====================
-const backToTop = document.createElement('div');
-backToTop.className = 'back-to-top';
-backToTop.innerHTML = '▲';
-backToTop.title = '回到顶部';
-document.body.appendChild(backToTop);
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 600) {
-    backToTop.classList.add('show');
-  } else {
-    backToTop.classList.remove('show');
-  }
-}, { passive: true });
-
-backToTop.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-});
-
 // ==================== 补充CSS注入（动画相关）====================
 const dynamicStyles = document.createElement('style');
 dynamicStyles.textContent = `
@@ -3749,38 +4425,6 @@ dynamicStyles.textContent = `
   }
   .accordion-trigger.active {
     color: var(--pine-green);
-  }
-
-  /* 回到顶部按钮 */
-  .back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    width: 42px;
-    height: 42px;
-    background: var(--pine-green);
-    color: var(--snow-white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.35s ease, transform 0.35s ease, background 0.3s ease;
-    z-index: 999;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.3);
-    pointer-events: none;
-  }
-  .back-to-top.show {
-    opacity: 0.85;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-  .back-to-top:hover {
-    opacity: 1;
-    background: var(--pine-light);
   }
 
   /* 导航栏活跃状态 */
