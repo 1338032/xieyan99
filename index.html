@@ -10,6 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Long+Cang&family=Ma+Shan+Zheng&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'AiDeWeiDao';
+  src: url('https://zf.sc.chinaz.com/Files/DownLoad/upload/2024/1031/aideweidao.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 :root {
   --pine-green: #4a7c6f;
   --pine-deep: #2d5a4e;
@@ -48,7 +55,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'AiDeWeiDao', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   background: var(--warm-white);
   color: var(--ink-dark);
   line-height: 1.8;
@@ -130,10 +137,10 @@ body {
 
 .prologue-name-ch {
   font-family: 'ZCOOL XiaoWei', 'Noto Serif SC', serif;
-  font-size: 4.5rem;
+  font-size: clamp(2rem, 10vw, 4.5rem);
   font-weight: 400;
   color: var(--pine-pale);
-  letter-spacing: 1.5rem;
+  letter-spacing: clamp(0.3rem, 2vw, 1.5rem);
   margin-bottom: 0.5rem;
   text-shadow: 0 3px 40px rgba(74, 124, 111, 0.5), 0 0 60px rgba(168, 207, 192, 0.3);
   line-height: 1.3;
@@ -170,7 +177,7 @@ body {
 }
 
 .prologue-theme {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.85rem;
   color: var(--camellia-soft);
   margin-top: 2.5rem;
@@ -229,9 +236,140 @@ body {
 }
 
 .nav-bar.scrolled {
-  box-shadow: 0 2px 20px var(--shadow-soft);
+    background: rgba(45, 90, 78, 0.95);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+.nav-bar.scrolled .nav-brand {
+  color: var(--pine-pale);
+}
+.nav-bar.scrolled .nav-link {
+  color: rgba(212, 232, 223, 0.7);
+}
+.nav-bar.scrolled .nav-link:hover,
+.nav-bar.scrolled .nav-link.active {
+  color: #fff;
+  background: rgba(255,255,255,0.1);
+}
+/* ===== 季节主题导航栏颜色 ===== */
+/* 春季 - 樱粉 */
+.theme-spring .nav-bar {
+  background: rgba(255, 245, 247, 0.92);
+}
+.theme-spring .nav-bar .nav-brand {
+  color: #b5566e;
+}
+.theme-spring .nav-bar .nav-link {
+  color: #8a6070;
+}
+.theme-spring .nav-bar .nav-link:hover,
+.theme-spring .nav-bar .nav-link.active {
+  color: #b5566e;
+  background: rgba(181, 86, 110, 0.08);
+}
+.theme-spring .nav-bar.scrolled {
+  background: rgba(181, 86, 110, 0.92);
+}
+.theme-spring .nav-bar.scrolled .nav-brand {
+  color: #ffe0e6;
+}
+.theme-spring .nav-bar.scrolled .nav-link {
+  color: rgba(255, 224, 230, 0.7);
+}
+.theme-spring .nav-bar.scrolled .nav-link:hover,
+.theme-spring .nav-bar.scrolled .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
 }
 
+/* 夏季 - 清蓝 */
+.theme-summer .nav-bar {
+  background: rgba(240, 249, 255, 0.92);
+}
+.theme-summer .nav-bar .nav-brand {
+  color: #2a7ab5;
+}
+.theme-summer .nav-bar .nav-link {
+  color: #5a8a9e;
+}
+.theme-summer .nav-bar .nav-link:hover,
+.theme-summer .nav-bar .nav-link.active {
+  color: #2a7ab5;
+  background: rgba(42, 122, 181, 0.08);
+}
+.theme-summer .nav-bar.scrolled {
+  background: rgba(42, 122, 181, 0.92);
+}
+.theme-summer .nav-bar.scrolled .nav-brand {
+  color: #d6eeff;
+}
+.theme-summer .nav-bar.scrolled .nav-link {
+  color: rgba(214, 238, 255, 0.7);
+}
+.theme-summer .nav-bar.scrolled .nav-link:hover,
+.theme-summer .nav-bar.scrolled .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* 秋季 - 暖橙 */
+.theme-autumn .nav-bar {
+  background: rgba(255, 248, 240, 0.92);
+}
+.theme-autumn .nav-bar .nav-brand {
+  color: #a0693a;
+}
+.theme-autumn .nav-bar .nav-link {
+  color: #8a7560;
+}
+.theme-autumn .nav-bar .nav-link:hover,
+.theme-autumn .nav-bar .nav-link.active {
+  color: #a0693a;
+  background: rgba(160, 105, 58, 0.08);
+}
+.theme-autumn .nav-bar.scrolled {
+  background: rgba(160, 105, 58, 0.92);
+}
+.theme-autumn .nav-bar.scrolled .nav-brand {
+  color: #fde8d0;
+}
+.theme-autumn .nav-bar.scrolled .nav-link {
+  color: rgba(253, 232, 208, 0.7);
+}
+.theme-autumn .nav-bar.scrolled .nav-link:hover,
+.theme-autumn .nav-bar.scrolled .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* 冬季 - 冷灰蓝 */
+.theme-winter .nav-bar {
+  background: rgba(242, 245, 250, 0.92);
+}
+.theme-winter .nav-bar .nav-brand {
+  color: #4a5e78;
+}
+.theme-winter .nav-bar .nav-link {
+  color: #6a7a8e;
+}
+.theme-winter .nav-bar .nav-link:hover,
+.theme-winter .nav-bar .nav-link.active {
+  color: #4a5e78;
+  background: rgba(74, 94, 120, 0.08);
+}
+.theme-winter .nav-bar.scrolled {
+  background: rgba(74, 94, 120, 0.92);
+}
+.theme-winter .nav-bar.scrolled .nav-brand {
+  color: #d8e2f0;
+}
+.theme-winter .nav-bar.scrolled .nav-link {
+  color: rgba(216, 226, 240, 0.7);
+}
+.theme-winter .nav-bar.scrolled .nav-link:hover,
+.theme-winter .nav-bar.scrolled .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
 .nav-inner {
   max-width: 1100px;
   margin: 0 auto;
@@ -243,7 +381,7 @@ body {
 }
 
 .nav-brand {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 1rem;
   color: var(--pine-deep);
   font-weight: 600;
@@ -293,7 +431,7 @@ body {
 }
 
 .section-number {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.7rem;
   color: var(--pine-light);
   letter-spacing: 0.5rem;
@@ -451,7 +589,7 @@ body {
   left: 0.6rem;
   font-size: 2rem;
   color: var(--pine-mist);
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   line-height: 1;
 }
 
@@ -471,7 +609,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.95rem;
   color: var(--pine-deep);
   font-weight: 500;
@@ -605,7 +743,7 @@ body {
 }
 
 .relation-name {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--ink-dark);
@@ -714,7 +852,7 @@ body {
 .layer-deep::before { background: var(--night-blue); }
 
 .layer-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -773,7 +911,7 @@ body {
 }
 
 .animal-name {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
@@ -813,7 +951,7 @@ body {
 }
 
 .room-name {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--pine-deep);
@@ -835,7 +973,7 @@ body {
 }
 
 .schedule-label {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--pine-deep);
@@ -880,7 +1018,7 @@ body {
 }
 
 .dialogue-scene-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.85rem;
   color: var(--pine-green);
   margin-bottom: 0.3rem;
@@ -906,7 +1044,7 @@ body {
 .dialogue-line.speech {
   border-left-color: var(--pine-mist);
   color: var(--ink-dark);
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
 }
 
 .dialogue-line.narration {
@@ -951,7 +1089,7 @@ body {
 }
 
 .worldview-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 1rem;
   font-weight: 600;
   color: var(--pine-deep);
@@ -962,7 +1100,7 @@ body {
 }
 
 .worldview-sub {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--ink-dark);
@@ -988,7 +1126,7 @@ body {
 }
 
 .contract-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--ink-black);
@@ -1002,7 +1140,7 @@ body {
 }
 
 .contract h3 {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--ink-black);
@@ -1110,7 +1248,7 @@ body {
 }
 
 .memory-category {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--pine-deep);
@@ -1135,7 +1273,7 @@ body {
 }
 
 .family-name {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--ink-dark);
@@ -1385,7 +1523,7 @@ body {
 }
 
 .psych-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--pine-deep);
@@ -1835,7 +1973,7 @@ body.theme-winter .epilogue {
 }
 
 .loading-subtitle {
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'AiDeWeiDao', serif;
   font-size: 1rem;
   font-weight: 400;
   color: #6b9e8a;
@@ -4499,8 +4637,8 @@ window.addEventListener('load', () => {
 const dynamicStyles = document.createElement('style');
 dynamicStyles.textContent = `
   /* 导航栏滚动状态 */
-  .nav.scrolled {
-    background: rgba(18, 20, 28, 0.97);
+  .nav-bar.scrolled {
+    background: rgba(45, 90, 78, 0.95);
     box-shadow: 0 2px 20px rgba(0,0,0,0.4);
   }
 
